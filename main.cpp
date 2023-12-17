@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 const std::string token =
-    "MTE1MjAyOTUyMTk2OTY4MDQwNQ.Gd40-M.selcAmuT6zAQi6g8XkjIAFy9d-UWpp_2TK7af0";
+    "";
 
 int main() {
   dpp::cluster bot(token);
