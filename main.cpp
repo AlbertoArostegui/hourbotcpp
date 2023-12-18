@@ -1,8 +1,8 @@
 #include "dpp/dpp.h"
 #include <cstdlib>
 
-const std::string token =
-    "";
+const std::string token = "";
+void handle_connection();
 
 int main() {
   dpp::cluster bot(token);

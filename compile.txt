@@ -1,0 +1,1 @@
+g++ -std=c++17 -o dppbot main.cpp dbconn.cpp -lmysqlcppconn -ldpp
