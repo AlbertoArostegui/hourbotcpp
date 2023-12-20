@@ -7,7 +7,7 @@
 
 void log_sql(std::string message);
 
-int handle_connection(long int user_id, uint server_id) {
+int handle_connection(long int user_id, long int server_id) {
   sql::Driver *driver;
   sql::Connection *con;
   sql::Statement *stmt;

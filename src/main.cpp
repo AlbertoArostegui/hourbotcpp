@@ -1,8 +1,9 @@
 #include "dpp/dpp.h"
 #include <cstdlib>
+#include <fstream>
 
-const std::string token = "";
-int handle_connection(long int user_id, uint ts);
+std::string token;
+int handle_connection(long int user_id, long int server_id);
 int handle_disconnection(long int user_id, long int server_id, uint ts);
 int insert_user_redis(long int user_id, uint ts);
 int user_is_set(long int user_id);
@@ -10,6 +11,14 @@ uint get_user_ts(long int user_id);
 void log_main(std::string message);
 
 int main() {
+  std::ifstream myfile("token.txt");
+  if (myfile.is_open()) {
+    myfile >> token;
+    myfile.close();
+  } else {
+    log_main("Unable to open file with token");
+  }
+  log_main("Token: " + token);
   dpp::cluster bot(token);
   bot.on_log(dpp::utility::cout_logger());
   bot.on_voice_state_update([](const dpp::voice_state_update_t &event) {
