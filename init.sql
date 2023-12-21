@@ -1,12 +1,10 @@
 CREATE TABLE user (
-  user_id INTEGER PRIMARY KEY NOT NULL,
-  discord_id BIGINT, 
+  user_id BIGINT PRIMARY KEY NOT NULL,
   time_total INTEGER
 );
 
 CREATE TABLE server (
-  server_id INTEGER PRIMARY KEY,
-  discord_id BIGINT
+  server_id BIGINT PRIMARY KEY
 );
 
 CREATE TABLE user_server (

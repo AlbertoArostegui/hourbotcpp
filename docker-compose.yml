@@ -3,10 +3,9 @@ services:
     image: albertoarostegui/mysql:hourbot
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD:  example
       MYSQL_DATABASE:  users_time
     volumes:
-      - ./data:/var/lib/mysql
+      - hourbot_mysql:/var/lib/mysql
     ports:
       - 3306:3306
   adminer:
@@ -18,3 +17,6 @@ services:
     image: redis
     ports:
       - 6379:6379
+
+volumes:
+  hourbot_mysql:
