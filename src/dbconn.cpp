@@ -25,7 +25,7 @@ int handle_connection(long int user_id, long int server_id) {
   res = stmt->executeQuery("SELECT user_id FROM user WHERE user_id =" +
                            std::to_string(user_id));
   if (res->next()) {
-    log_sql("User id: " + std::to_string(res->getUInt("user_id")));
+    log_sql("User id: " + std::to_string(res->getInt64("user_id")));
     log_sql("Found in the database");
 
   } else {
@@ -37,7 +37,7 @@ int handle_connection(long int user_id, long int server_id) {
   res = stmt->executeQuery("SELECT server_id FROM server WHERE server_id =" +
                            std::to_string(server_id));
   if (res->next()) {
-    log_sql("Server id: " + std::to_string(res->getUInt("server_id")));
+    log_sql("Server id: " + std::to_string(res->getInt64("server_id")));
     log_sql("Found in the database");
   } else {
     log_sql("Server not found, inserting into the db");
@@ -51,7 +51,7 @@ int handle_connection(long int user_id, long int server_id) {
       " AND server_id = " + std::to_string(server_id));
   if (res->next()) {
     log_sql("User_id in user_server: " +
-            std::to_string(res->getUInt("user_id")));
+            std::to_string(res->getInt64("user_id")));
     log_sql("Found in the database");
   } else {
     log_sql("User server not found, inserting into the db");
@@ -83,10 +83,13 @@ int handle_disconnection(long int user_id, long int server_id,
           ", time_spent: " + std::to_string(time_spent));
   /* Connect to the MySQL test database */
   stmt = con->createStatement();
+  log_sql("SELECT user_id FROM user WHERE user_id = " +
+          std::to_string(user_id));
   res = stmt->executeQuery("SELECT user_id FROM user WHERE user_id =" +
                            std::to_string(user_id));
   if (res->next()) {
-    log_sql("User id: " + std::to_string(res->getUInt("user_id")));
+    log_sql("User id: " + std::to_string(res->getInt64("user_id")));
+
     stmt->execute("UPDATE user SET time_total = time_total + " +
                   std::to_string(time_spent) +
                   " WHERE user_id = " + std::to_string(user_id));
